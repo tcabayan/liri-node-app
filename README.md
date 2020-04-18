@@ -60,7 +60,7 @@ The searches will also be logged in the log.txt file like this:
 ![Spotify-this log.txt screenshot](/images/spotify-this-search-log.png)
 Format: ![Alt Text](url)
 
-If you fail to coose a song, you will see this in the terminal and log.txt respectively:
+If you fail to choose a song, you will see this in the terminal and log.txt respectively:
 
 ![Spotify-this terminal screenshot](/images/spotify-this-sign-t.png)
 Format: ![Alt Text](url)

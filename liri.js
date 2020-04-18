@@ -51,16 +51,14 @@ function getConcertInfo() {
                         ("Event Date: " + moment(response.data[i].datetime).format('MMMM Do YYYY, h:mm a')),
                         ("-----------------------------------------------"),
                         ("\n")
-                    ].join("\n\n");
+                    ].join("\n");
                     console.log(eventData);
                     eventNumber++
                 }
 
             }
         })
-        .catch(function (error) {
-            (error);
-        });
+        .catch(console.log) 
 }
 
 //When Using Command "Spotify-this-Song" Using Spotify API
@@ -83,14 +81,12 @@ function getSongInfo() {
                     ("-----------------------------------------------"),
                     ("\n")
 
-                ].join("\n\n");
+                ].join("\n");
                 console.log(songData);
                 songList++
             }
         })
-        .catch(function (error) {
-            (error);
-        });
+        .catch(console.log) 
 }
 
 //When Using Command "Movie-This" Using the OMDB API
@@ -102,26 +98,22 @@ function getMovieInfo() {
     }
     var queryUrl = "http://www.omdbapi.com/?t=" + searchTerm + "&y=&plot=short&apikey=trilogy"
     axios.get(queryUrl).then( function (response) {
-        for (var i = 0; i < response.data.length; i++) {
-                var movieData = [
-                    ("-----------------------------------------------"),
-                    ("Movie information"),
-                    ("Title: " + response.data.Title),
-                    ("Year released: " + response.data.Year),
-                    ("IMDB rating: " + response.data.imdbRating),
-                    ("Rotten Tomatoes Rating: "  + response.data.Ratings[1].Value + " rating."),
-                    ("Country Produced: " + response.data.Country),
-                    ("Language of Movie: " + response.data.Language),
-                    ("Plot: " + response.data.Plot),
-                    ("Actors/Actresses: " + response.data.Actors),
-                    ("-----------------------------------------------"),
-                ].join("\n\n"); 
-                console.log(movieData);    
-            }
-        }) 
-        .catch(function (error) {
-            (error);
-        });
+        var movieData = [
+            ("-----------------------------------------------"),
+            ("Movie information"),
+            ("Title: " + response.data.Title),
+            ("Year released: " + response.data.Year),
+            ("IMDB rating: " + response.data.imdbRating),
+            ("Rotten Tomatoes Rating: "  + response.data.Ratings[1].Value + " rating."),
+            ("Country Produced: " + response.data.Country),
+            ("Language of Movie: " + response.data.Language),
+            ("Plot: " + response.data.Plot),
+            ("Actors/Actresses: " + response.data.Actors),
+            ("-----------------------------------------------"),
+        ].join("\n"); 
+        console.log(movieData);    
+    })
+    .catch(console.log);
 }
 
 //When Using Command "Do-What-It-Says" Using random.txt
@@ -151,7 +143,7 @@ function getRandomInfo(){
                                 ("-----------------------------------------------"),
                                 ("\n"),
 
-                            ].join("\n\n");
+                            ].join("\n");
                             console.log(songData);
                             songList++
                         }

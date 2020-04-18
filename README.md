@@ -1,11 +1,11 @@
 # liri-node-app
-#**LIRI**
+**LIRI**
 
 LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and Recognition Interface, LIRI is a Language Interpretation and Recognition Interface. LIRI will be a command line node application that takes in parameters and gives you back data. To accomplish this, it utilizes three API's: BandsInTown, Spotify, and OMDB. Along with these API's, LIRI Bot was built with node.js, axios, moment.js, and dotenv. You can see a deployed version of the app here https://tcabayan.github.io/liri-node-app/ [GitHub](http://tcabayan.github.com).
 
 My role in this project has been developing the code that brings this idea to life. 
 
-##**Instructions:**
+**Instructions:**
 
 1. Obtain the API keys mentioned above
 
@@ -24,8 +24,10 @@ My role in this project has been developing the code that brings this idea to li
 
 1. Type in one of the following commands:
 
-###**concert-this + your desired artist choice**
+**concert-this + your desired artist choice**
+
 _node liri.js concert-this <artist/band name here>_
+
 _Example: node liri.js concert-this Elton John_
 
 The "concert-this" command will search Bands in Town and pull a list of concert dates for selected artist if any are scheduled within a reasonable time period of this date. Specifically, it will return the name of the concert venue, the venue location, and the date of the event.
@@ -40,8 +42,10 @@ The searches will also be logged in the log.txt file like this:
 ![Concert-this log.txt screenshot](/images/concert-this-log.png)
 Format: ![Alt Text](url)
 
-###**spotify-this-song + your desired song choice**
+**spotify-this-song + your desired song choice**
+
 _node liri.js spotify-this-song '<song name here>'_
+
 _Example: node liri.js spotify-this-song Here Comes the Sun_ 
 
 This "spotify-this-song" comman will search Spotify and pull a list of songs with or close to the song title entered. Specifically, it will return the song title, album title, artist(s) name, and Preview URL.
@@ -64,8 +68,10 @@ Format: ![Alt Text](url)
 ![Spotify-this log.txt screenshot](/images/spotify-this-sign-log.png)
 Format: ![Alt Text](url)
 
-###**movie-this + your desired movie choice**
+**movie-this + your desired movie choice**
+
 _node liri.js movie-this '<movie name here>'_
+
 _Example: node liri.js movie-this Beethoven_
 
 The "movie-this" command will search OMDB for your movie choice and pull relevant information regarding movie inputted in search. Specifically, it will return information with respect to the movie title, the year the movie was released, the IMDB rating, the Rotten Tomatoes rating, the country, the language, the basic plot, and the actors in the movie. 
@@ -88,7 +94,8 @@ Format: ![Alt Text](url)
 ![Movie-this log.txt screenshot](/images/movie-this-mrnobody-log.png)
 Format: ![Alt Text](url)
 
-###**do-what-it-says**
+**do-what-it-says**
+
 _node liri.js do-what-it-says_
 
 The "do-what-it-says" command will pull information from the random.txt file. The terminal will look a little something like this:

@@ -36,8 +36,8 @@ else {
 
 //When Use Command "Concert-This" Using Bands in Town Artist Events API
 function getConcertInfo() {
-    axios.get("https://rest.bandsintown.com/artists/" + searchTerm + "/events?app_id=codingbootcamp").then(
-        function (response) {
+    var queryUrl= "https://rest.bandsintown.com/artists/" + searchTerm + "/events?app_id=codingbootcamp"
+    axios.get(queryUrl).then( function (response) {
             if (response.data.length === 0) {
                 ("Sorry. I cannot locate this band or artist.");
             } else {
@@ -100,11 +100,9 @@ function getMovieInfo() {
         console.log("If you haven't watched 'Mr. Nobody,' then you should: http://www.imdb.com/title/tt0485947/");
         console.log("It's on Netflix!");
     }
-    axios.get("http://www.omdbapi.com/?t=" + searchTerm + "&y=&plot=short&apikey=trilogy").then(
-        function (response) {
-            if (response.data.length === 0) {
-                ("Sorry. I cannot locate this movie.");
-            } else {
+    var queryUrl = "http://www.omdbapi.com/?t=" + searchTerm + "&y=&plot=short&apikey=trilogy"
+    axios.get(queryUrl).then( function (response) {
+        for (var i = 0; i < response.data.length; i++) {
                 var movieData = [
                     ("-----------------------------------------------"),
                     ("Movie information"),
@@ -117,8 +115,7 @@ function getMovieInfo() {
                     ("Plot: " + response.data.Plot),
                     ("Actors/Actresses: " + response.data.Actors),
                     ("-----------------------------------------------"),
-                ].join("\n\n");
-                
+                ].join("\n\n"); 
                 console.log(movieData);    
             }
         }) 

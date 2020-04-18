@@ -26,7 +26,7 @@ My role in this project has been developing the code that brings this idea to li
 
 **concert-this + your desired artist choice**
 
-_node liri.js concert-this <artist/band name here>_
+_Command: node liri.js concert-this BAND/ARTIST_
 
 _Example: node liri.js concert-this Elton John_
 
@@ -44,7 +44,7 @@ The searches will also be logged in the log.txt file like this:
 
 **spotify-this-song + your desired song choice**
 
-_node liri.js spotify-this-song '<song name here>'_
+_Command: node liri.js spotify-this-song SONG_
 
 _Example: node liri.js spotify-this-song Here Comes the Sun_ 
 
@@ -53,24 +53,21 @@ This "spotify-this-song" comman will search Spotify and pull a list of songs wit
 The terminal will look a little something like this:
 
 ![Spotify-this terminal screenshot](/images/spotify-this-search-t.png)
-Format: ![Alt Text](url)
 
 The searches will also be logged in the log.txt file like this:
 
 ![Spotify-this log.txt screenshot](/images/spotify-this-search-log.png)
-Format: ![Alt Text](url)
 
 If you fail to choose a song, you will see this in the terminal and log.txt respectively:
 
 ![Spotify-this terminal screenshot](/images/spotify-this-sign-t.png)
-Format: ![Alt Text](url)
+
 
 ![Spotify-this log.txt screenshot](/images/spotify-this-sign-log.png)
-Format: ![Alt Text](url)
 
 **movie-this + your desired movie choice**
 
-_node liri.js movie-this '<movie name here>'_
+_Command: node liri.js movie-this MOVIE NAME_
 
 _Example: node liri.js movie-this Beethoven_
 
@@ -79,33 +76,27 @@ The "movie-this" command will search OMDB for your movie choice and pull relevan
 The terminal will look a little something like this:
 
 ![Movie-this terminal screenshot](/images/movie-this-search-t.png)
-Format: ![Alt Text](url)
 
 The searches will also be logged in the log.txt file like this:
 
 ![Movie-this log.txt screenshot](/images/movie-this-search-log.png)
-Format: ![Alt Text](url)
 
 If you fail to choose a movie, you will see this in the terminal and log.txt respectively:
 
 ![Movie-this terminal screenshot](/images/movie-this-mrnobody-t.png)
-Format: ![Alt Text](url)
 
-![Movie-this log.txt screenshot](/images/movie-this-mrnobody-log.png)
-Format: ![Alt Text](url)
+![Movie-this log.txt screenshot](/images/move-this-mrnobody-log.png)
 
 **do-what-it-says**
 
-_node liri.js do-what-it-says_
+_Command: node liri.js do-what-it-says_
 
 The "do-what-it-says" command will pull information from the random.txt file. The terminal will look a little something like this:
 
 ![Do-What-It-Says terminal screenshot](/images/do-what-it-says-t.png)
-Format: ![Alt Text](url)
 
 The searches will also be logged in the log.txt file like this:
 
 ![Do-What-It-Says log.txt screenshot](/images/do-what-it-says-log.png)
-Format: ![Alt Text](url)
 
 

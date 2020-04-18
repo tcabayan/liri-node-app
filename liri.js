@@ -15,7 +15,7 @@ var spotify = new Spotify(keys.spotify);
 // Code to read user command
 var userInput = process.argv[2];
 // Code to read user query
-var searchTerm = process.argv[3];
+var searchTerm = process.argv.slice(3).join(" ");
 
 // Choose a Function to Run
 if (userInput === "concert-this") {
@@ -24,7 +24,7 @@ if (userInput === "concert-this") {
 else if (userInput === "spotify-this-song") {
     getSongInfo();
 }
-else if (userInput=== "movie-this") {
+else if (userInput === "movie-this") {
     getMovieInfo();
 }
 else if (userInput === "do-what-it-says") {
@@ -36,29 +36,28 @@ else {
 
 //When Use Command "Concert-This" Using Bands in Town Artist Events API
 function getConcertInfo() {
-    var queryUrl= "https://rest.bandsintown.com/artists/" + searchTerm + "/events?app_id=codingbootcamp"
-    axios.get(queryUrl).then( function (response) {
-            if (response.data.length === 0) {
-                ("Sorry. I cannot locate this band or artist.");
-            } else {
-                var eventNumber = 1;
-                for (var i = 0; i < response.data.length; i++) {
-                    console.log('Upcoming concerts for ' + searchTerm + '!\nHere\'s your list!');
-                    var eventData = [
-                        ("-----------------------------------------------"), 
-                        ("Venue Name: " + response.data[i].venue.name),
-                        ("Venue Location: " + response.data[i].venue.city),
-                        ("Event Date: " + moment(response.data[i].datetime).format('MMMM Do YYYY, h:mm a')),
-                        ("-----------------------------------------------"),
-                        ("\n")
-                    ].join("\n");
-                    console.log(eventData);
-                    eventNumber++
-                }
+    var queryUrl = "https://rest.bandsintown.com/artists/" + searchTerm + "/events?app_id=codingbootcamp"
+    axios.get(queryUrl).then(function (response) {
+        var eventNumber = 1;
+        for (var i = 0; i < response.data.length; i++) {
+            console.log('Upcoming concerts for ' + searchTerm + '!\nHere\'s your list!');
+            var eventData = [
+                "-----------------------------------------------",
+                "Venue Name: " + response.data[i].venue.name,
+                "Venue Location: " + response.data[i].venue.city,
+                "Event Date: " + moment(response.data[i].datetime).format('MMMM Do YYYY, h:mm a'),
+                "-----------------------------------------------",
+                "\n"
+            ].join("\n");
+            console.log(eventData);
+            eventNumber++
+            fs.appendFileSync("log.txt", eventData, function (error) {
+                if (error) throw error;
+            });
+        }
 
-            }
-        })
-        .catch(console.log) 
+    })
+        .catch(console.log);
 }
 
 //When Using Command "Spotify-this-Song" Using Spotify API
@@ -70,23 +69,24 @@ function getSongInfo() {
         .then(function (response) {
             var songList = 1;
             for (var i = 0; i < response.tracks.items.length; i++) {
-
                 var songData = [
-                    ("-----------------------------------------------"),
-                    ("Number on List: " + songList),
-                    ("Artist: " + response.tracks.items[i].artists[0].name),
-                    ("Song Name: " + response.tracks.items[i].name),
-                    ("Preview Song: " + response.tracks.items[i].preview_url),
-                    ("Album: " + response.tracks.items[i].album.name),
-                    ("-----------------------------------------------"),
-                    ("\n")
-
+                    "-----------------------------------------------",
+                    "Number on List: " + songList,
+                    "Artist: " + response.tracks.items[i].artists[0].name,
+                    "Song Name: " + response.tracks.items[i].name,
+                    "Preview Song: " + response.tracks.items[i].preview_url,
+                    "Album: " + response.tracks.items[i].album.name,
+                    "-----------------------------------------------",
+                    "\n"
                 ].join("\n");
                 console.log(songData);
                 songList++
+                fs.appendFileSync("log.txt", songData, function (error) {
+                    if (error) throw error;
+                });
             }
         })
-        .catch(console.log) 
+        .catch(console.log);
 }
 
 //When Using Command "Movie-This" Using the OMDB API
@@ -97,65 +97,68 @@ function getMovieInfo() {
         console.log("It's on Netflix!");
     }
     var queryUrl = "http://www.omdbapi.com/?t=" + searchTerm + "&y=&plot=short&apikey=trilogy"
-    axios.get(queryUrl).then( function (response) {
+    axios.get(queryUrl).then(function (response) {
         var movieData = [
-            ("-----------------------------------------------"),
-            ("Movie information"),
-            ("Title: " + response.data.Title),
-            ("Year released: " + response.data.Year),
-            ("IMDB rating: " + response.data.imdbRating),
-            ("Rotten Tomatoes Rating: "  + response.data.Ratings[1].Value + " rating."),
-            ("Country Produced: " + response.data.Country),
-            ("Language of Movie: " + response.data.Language),
-            ("Plot: " + response.data.Plot),
-            ("Actors/Actresses: " + response.data.Actors),
-            ("-----------------------------------------------"),
-        ].join("\n"); 
-        console.log(movieData);    
+            "-----------------------------------------------",
+            "Movie information",
+            "Title: " + response.data.Title,
+            "Year released: " + response.data.Year,
+            "IMDB rating: " + response.data.imdbRating,
+            "Rotten Tomatoes Rating: " + response.data.Ratings[1].Value + " rating.",
+            "Country Produced: " + response.data.Country,
+            "Language of Movie: " + response.data.Language,
+            "Plot: " + response.data.Plot,
+            "Actors/Actresses: " + response.data.Actors,
+            "-----------------------------------------------",
+            "\n"
+        ].join("\n");
+        console.log(movieData);
+        fs.appendFile("log.txt", movieData, function (error) {
+            if (error) throw error;
+        });
     })
-    .catch(console.log);
+        .catch(console.log);
 }
 
 //When Using Command "Do-What-It-Says" Using random.txt
-function getRandomInfo(){
+function getRandomInfo() {
     ("I do not detect an input. Pulling random search...");
     fs.readFile("random.txt", "utf8", function (error, data) {
-            if (error) {
-                return (error);
-            }
-            // Places content of random.txt file inside an array
-            var dataArr = data.split(",");
-            var userInput = dataArr[0];
-            var searchTerm = dataArr[1].replace(/\"/g, "")
-
-            if (userInput === "spotify-this-song") {
-                spotify.search({ type: 'track', query: searchTerm })
-                    .then(function (response) {
-                        var songList = 1;
-                        for (var i = 0; i < response.tracks.items.length; i++) {
-                            var songData = [
-                                ("-----------------------------------------------"),
-                                ("Song Number: " + songList),
-                                ("Artist: " + response.tracks.items[i].artists[0].name),
-                                ("The song name is: " + response.tracks.items[i].name),
-                                ("Here is a song preview from Spotify: " + response.tracks.items[i].preview_url),
-                                ("The album containing this song is: " + response.tracks.items[i].album.name),
-                                ("-----------------------------------------------"),
-                                ("\n"),
-
-                            ].join("\n");
-                            console.log(songData);
-                            songList++
-                        }
-                    })
-                    .catch(function (error) {
-                        (error);
-                    })
-            }
-            else {
-                ("I can't help you out here.");
-            }
-
+        if (error) {
+            return (error);
         }
-        )
+        // Places content of random.txt file inside an array
+        var dataArr = data.split(",");
+        var userInput = dataArr[0];
+        var searchTerm = dataArr[1].replace(/\"/g, "")
+
+        if (userInput === "spotify-this-song") {
+            spotify.search({ type: 'track', query: searchTerm })
+                .then(function (response) {
+                    var songList = 1;
+                    for (var i = 0; i < response.tracks.items.length; i++) {
+                        var songData = [
+                            "-----------------------------------------------",
+                            "Song Number: " + songList,
+                            "Artist: " + response.tracks.items[i].artists[0].name,
+                            "The song name is: " + response.tracks.items[i].name,
+                            "Here is a song preview from Spotify: " + response.tracks.items[i].preview_url,
+                            "The album containing this song is: " + response.tracks.items[i].album.name,
+                            "-----------------------------------------------",
+                            "\n",
+                        ].join("\n");
+                        console.log(songData);
+                        songList++
+                        fs.appendFileSync("log.txt", songData, function (error) {
+                            if (error) throw error;
+                        });
+                    }
+                })
+                .catch(console.log);
+        }
+        else {
+            ("I can't help you out here.");
+        }
+
+    })
 }

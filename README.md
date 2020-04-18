@@ -35,12 +35,12 @@ The "concert-this" command will search Bands in Town and pull a list of concert 
 The terminal will look a little something like this:
 
 ![Concert-this terminal screenshot](/images/concert-this-t.png)
-Format: ![Alt Text](url)
+
 
 The searches will also be logged in the log.txt file like this:
 
 ![Concert-this log.txt screenshot](/images/concert-this-log.png)
-Format: ![Alt Text](url)
+
 
 **spotify-this-song + your desired song choice**
 
